@@ -1,0 +1,73 @@
+{
+  "name": "ProductName",
+  "adapters": {
+    "mingle": {
+      "host": "my.mingle.com",
+      "port": "443",
+      "username": "joes",
+      "password": "password",
+      "project": "mingle_project"
+    },
+    "servicenow": {
+      "instance": "https://my.service-now.com",
+      "username": "joes",
+      "password": "password"
+    }
+  },
+  "release_filter": "Type is Release",
+  "change_filter": "Type is Change AND 'Release' is '%name%'",
+  "release_map": {
+    "name": "release_item.name",
+    "number": "release_item.number"
+  },
+  "events": [
+    {
+      "name":   "='SOAK'",
+      "date":   "release_item.properties['Production Soak']",
+      "start":  "release_item.properties['Release Production Soak Start Time']",
+      "end":    "release_item.properties['Release Production Soak End Time']",
+      "number": "release_item.properties['CRQ - Production Soak']"
+    },
+    {
+      "name":   "='Production Release'",
+      "date":   "release_item.properties['RTW']",
+      "start":  "release_item.properties['RTW Start Time']",
+      "end":    "release_item.properties['RTW End Time']",
+      "number": "release_item.properties['CRQ - Production Deployment']"
+    },
+    {
+      "name":   "='HotFix'",
+      "number": "release_item.properties['CRQ - Production Hotfix']"
+    }
+  ],
+  "event_map": {
+    "name":               "event_template.name",
+    "number":             "event_item.number",
+    "state":              "event_item.state",
+    "status":             "event_item.__status",
+    "isActive":           "event_item.active",
+    "approval":           "event_item.approval",
+    "m_start_time":       "this.joinMingleDateTime(release_item.properties[event_item.date], release_item.properties[event_item.start])",
+    "m_end_time":         "this.joinMingleDateTime(release_item.properties[event_item.date], release_item.properties[event_item.end])",
+    "start_time":         "event_item.start_date || result.m_start_time",
+    "end_time":           "event_item.end_date || result.m_end_time",
+    "actual_start_time":  "event_item.work_start",
+    "actual_end_time":    "event_item.work_end",
+    "environment":        "event_item.u_environment",
+    "details":            "event_item.description",
+    "coordinator":        "event_item.u_coordinator",
+    "implementer":        "event_item.assigned_to"
+  },
+  "change_map": {
+    "name":                   "change_item.name",
+    "number":                 "change_item.number",
+    "owner":                  "change_item.properties['Change Owner'].name",
+    "creator":                "change_item.created_by.name",
+    "test_lead":              "change_item.properties['Test Lead'].name",
+    "team":                   "change_item.properties['Team']",
+    "category":               "change_item.properties['Change Category']",
+    "gated_change":           "change_item.properties['Gated Change']",
+    "production_traffic":     "change_item.properties['Taking Production Traffic at Release?']",
+    "signoff":                "change_item.properties['Release Test Signoff']"
+  }
+}

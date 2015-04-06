@@ -1,0 +1,76 @@
+<div>
+  <div>
+    <h2>
+      <a ng-href="{{selected_release.product.link}}">{{selected_release.product.name}}</a> Release
+      <a ng-href="{{selected_release.link}}">{{selected_release.name}}</a>
+    </h2>
+  </div>
+  <div>
+    <timeline-chart events='events' selected='selected_release' domain='timeline_domain'></timeline-chart>
+  </div>
+  <div>
+    <h3>Events for Release {{selected_release.name}}</h3>
+    <table class="table table-condensed table-bordered">
+      <thead>
+        <tr>
+          <td></td>
+          <td colspan="2">Planned</td>
+          <td colspan="2">Actual</td>
+          <td>ServiceNow</td>
+          <td colspan="3"></td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>Start</td>
+          <td>End</td>
+          <td>Start</td>
+          <td>End</td>
+          <td>Number</td>
+          <td>State</td>
+          <td>Status</td>
+          <td>Environment</td>
+        </tr>
+      </thead>
+      <tbody>
+            <!-- ng-class="(vis_list.indexOf(release._id) >= 0) ? 'timeline-visible':''" -->
+        <tr ng-repeat="event in events | filter: {release: {_id: selected_release._id}} | orderBy:'start_time':false"
+            class="event event-{{event._id}}">
+          <td>{{event.name}}</td>
+          <td>{{event.start_time | date:'MMMM dd, yyyy h:mm a'}}</td>
+          <td>{{event.end_time | date:'MMMM dd, yyyy h:mm a'}}</td>
+          <td>{{event.actual_start_time | date:'MMMM dd, yyyy h:mm a'}}</td>
+          <td>{{event.actual_end_time | date:'MMMM dd, yyyy h:mm a'}}</td>
+          <td>{{event.number}}</td>
+          <td>{{event.state}}</td>
+          <td>{{event.status}}</td>
+          <td>{{event.environment}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>Code Changes for Release {{selected_release.name}}</h3>
+    <table class="table table-condensed table-bordered">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Owner</td>
+          <td>Team</td>
+          <td>Test Lead</td>
+          <td>Sign-Off</td>
+        </tr>
+      </thead>
+      <tbody>
+            <!-- ng-class="(vis_list.indexOf(release._id) >= 0) ? 'timeline-visible':''" -->
+        <tr ng-repeat="change in code_changes"
+            class="code_change code_change-{{change._id}}">
+          <td>{{change.name}}</td>
+          <td>{{change.owner}}</td>
+          <td>{{change.team}}</td>
+          <td>{{change.test_lead}}</td>
+          <td>{{change.signoff}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

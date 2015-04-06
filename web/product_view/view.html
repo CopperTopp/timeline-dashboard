@@ -1,0 +1,37 @@
+<div>
+  <div>
+    <h2>Product
+      <select ng-model="selected_product"
+              ng-options="product.name for product in products track by product._id"
+              ng-change="OnSelectedProductChanged()">
+      </select>
+    </h2>
+  </div>
+  <div>
+    <timeline-chart events='releases' selected='selected_product' domain='timeline_domain'></timeline-chart>
+  </div>
+  <div>
+    <table class="table table-condensed table-bordered">
+      <thead>
+        <tr>
+          <td>Name</td>
+          <td>Start</td>
+          <td>End</td>
+        </tr>
+      </thead>
+      <tbody>
+        <h3>Releases for {{selected_product.name}}</h3>
+        <h4>Releases per Year</h4>
+        <ul ng-repeat="count in release_year_count | orderBy:'year':true" class="count_detail">
+          <li><b>{{count.year}}</b>: {{count.count}}</li>
+        </ul>
+        <tr ng-repeat="release in releases | filter: {product: {name: selected_product.name}} | orderBy:'start_time':true"
+            class="release release-{{release._id}}">
+          <td><a ng-href="{{release.link}}">{{release.name}}</a></td>
+          <td>{{release.start_time | date:'MMMM dd, yyyy h:mm a'}}</td>
+          <td>{{release.end_time | date:'MMMM dd, yyyy h:mm a'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+{
+  "name": "ProductName",
+  "adapters": {
+    "tfs": {
+      "host":     "tfs.rest.api",
+      "port":     "18080",
+      "username": "joes",
+      "password": "password",
+      "project":  "TFS Project Name"
+    },
+    "servicenow": {
+      "instance": "https://my.service-now.com",
+      "username": "joes",
+      "password": "password"
+    }
+  },
+  "filter": "Group='TFSGroup' AND Title Contains 'TFSProductName'",
+  "release_map": {
+    "name":             "release_item.systemTitle",
+    "number":           "release_item.id",
+    "description":      "release_item.systemTitle + ' [' + release_item.t2ReleaseType + ']'",
+    "release_type":     "release_item.t2ReleaseType",
+    "state":            "release_item.systemState",
+    "hip_chat_room":    "release_item.t2HipChatRoom",
+    "team.relman":      "release_item.t2ReleaseManager",
+    "team.implementer": "release_item.systemAssignedTo",
+    "team.pm":          "release_item.t2ProgramManager",
+    "team.test_iota":   "release_item.expediaTestLead",
+    "team.dev":         "release_item.expediaDevLead"
+  },
+  "release_tooltip_UNDER_CONSTRUCTION": [
+    {
+      "type": "line",
+      "name": "Name",
+      "value": "release.name"
+    },
+    {
+      "type": "line",
+      "name": "Code Changes",
+      "value": "release.code_changes.length"
+    },
+    {
+      "type": "list",
+      "name": "Events",
+      "iterate": {
+        "item": "event",
+        "in": "release.events"
+      },
+      "template": [
+        {
+          "type": "list",
+          "name": "Name",
+          "value": "event.name"
+        },
+        {
+          "type": "link",
+          "name": "CRQ",
+          "value": "event.number",
+          "href": "http://my.servicenow.com/?number=#TOKEN#"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name":                   "='SOAK'",
+      "start_time":             "release_item.t2DRStartDate",
+      "end_time":               "release_item.t2DREndDate",
+      "actual_start_time":      "release_item.t2DRStartTime",
+      "actual_end_time":        "release_item.t2DREndTime",
+      "number":                 "release_item.t2SoakCrq"
+    },
+    {
+      "name":                   "='Production Release'",
+      "start_time":             "release_item.t2ProdStartDate",
+      "end_time":               "release_item.t2ProdEndDate",
+      "actual_start_time":      "release_item.t2ProdStartTime",
+      "actual_end_time":        "release_item.t2ProdEndTime",
+      "number":                 "release_item.t2CRNumber"
+    }
+  ],
+  "event_map": {
+    "name":                   "event_template.name",
+    "number":                 "event_item.number",
+    "state":                  "event_item.state",
+    "status":                 "event_item.__status",
+    "isActive":               "event_item.active",
+    "approval":               "event_item.approval",
+    "start_time":             "event_item.start_date || event_template.start_time",
+    "end_time":               "event_item.end_date || event_template.end_time",
+    "actual_start_time":      "event_item.work_start || event_template.actual_start_time",
+    "actual_end_time":        "event_item.work_end || event_template.actual_end_time",
+    "environment":            "event_item.u_environment",
+    "details":                "event_item.description",
+    "coordinator":            "event_item.u_coordinator",
+    "implementer":            "event_item.assigned_to"
+  },
+  "event_tooltip": [
+    {
+      "type": "line",
+      "name": "Name",
+      "value": "event.name"
+    },
+    {
+      "type": "schedule",
+      "name": "Schedule",
+      "format": "hh:mm ",
+      "start": "event.start_time",
+      "end": "event.end_time"
+    },
+    {
+      "type": "line",
+      "name": "Details",
+      "value": "event.details"
+    },
+    {
+      "type": "line",
+      "name": "Environment",
+      "value": "event.environment"
+    },
+    {
+      "type": "link",
+      "name": "CRQ",
+      "value": "event.number",
+      "href": "http://my.servicenow.com/?number=#TOKEN#"
+    },
+    {
+      "type": "line",
+      "name": "Approval",
+      "value": "event.approval"
+    },
+    {
+      "type": "line",
+      "name": "State",
+      "value": "event.state"
+    },
+    {
+      "type": "line",
+      "name": "Status",
+      "value": "event.status"
+    },
+    {
+      "type": "line",
+      "name": "Implementor",
+      "value": "event.implementor"
+    },
+    {
+      "type": "line",
+      "name": "Coordinator",
+      "value": "event.coordinator"
+    }
+  ]
+}

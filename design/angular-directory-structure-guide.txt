@@ -1,0 +1,61 @@
+server.js - Has to be at root, or gets 'Forbidden' access to 'web' folder when routing with Express.
+server
+	data_reader.js
+	config.json
+	lib
+		models.js
+		schemas.js
+		change_freeze.js
+		id.js
+		logger.js
+		products.js
+		service_map.json
+		services.js
+		util.js
+	products
+		airint.json
+		bfs.json
+		cars.json
+		expweb.json
+	utils
+		mingle_driver.js
+		mingle_rest_driver.js
+		mongoose_driver.js
+		seiso_driver.js
+		servicenow_driver.js
+		tfs_driver.js
+web
+	index.html
+	app.js
+	products
+		controller.js
+		view.html
+	releases
+		controller.js
+		view.html
+	services
+		visible.js
+	directives
+		timeline.js
+	scripts
+		angular.js
+		angular-route.js
+		bootstrap.js
+		rest_paths.js
+		today.js
+	style
+		bootstrap.css
+		app.css
+tests
+	id-test.js
+demos
+	20141218
+		mingle.txt
+		ReleaseDashboard-20141218.pptx
+		servicenow.txt
+		tfs.txt
+design
+	angular-directory-structure-guide.txt (this doc)
+	DBMappingSchema.vsd
+	DBReferenceArraySchema.vsd
+	ReleaseDashboardNotes.docx

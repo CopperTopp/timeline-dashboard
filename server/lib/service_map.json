@@ -1,0 +1,27 @@
+{
+  "name":                   "service_instance.service.name",
+  "description":            "service_instance.service.description",
+  "group":                  "service_instance.service.group.name",
+  "owner.firstname":        "service_instance.service.owner.firstName",
+  "owner.lastname":         "service_instance.service.owner.lastName",
+  "owner.username":         "service_instance.service.owner.username",
+  "owner.email":            "service_instance.service.owner.email",
+  "data_center":            "service_instance.dataCenter.name",
+  "region":                 "service_instance.dataCenter.region.name",
+  "environment":            "service_instance.environment.name",
+  "load_balancer.name":     "service_instance.loadBalancer.name",
+  "load_balancer.type":     "service_instance.loadBalancer.type",
+  "nodes[service_instance.nodes]": {
+    "name":                   "array_item.name",
+    "health":                 "array_item.healthStatus.name",
+    "ipAddresses[array_item.ipAddresses]": {
+      "ip":                     "array_item.ipAddress",
+      "endpoints[array_item.endpoints]": {
+        "port":                   "array_item.port.number",
+        "protocol":               "array_item.port.protocol",
+        "rotationStatus.state":   "array_item.rotationStatus.key",
+        "rotationStatus.success": "array_item.rotationStatus.statusType.key"
+      }
+    }
+  }
+}

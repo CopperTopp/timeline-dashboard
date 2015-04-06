@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="reldashApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline Dashboard - Home</title>
+    <base href="/">
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/app.css">
+    <script type='text/javascript' src="scripts/jquery-2.1.3.js"></script>
+    <!-- ToDo: Use min.js in Production
+    <script type='text/javascript' src="scripts/jquery-2.1.3.min.js"></script>
+    -->
+    <script type='text/javascript' src="scripts/angular.js"></script>
+    <script type='text/javascript' src="scripts/angular-route.js"></script>
+    <!-- ToDo: Use min.js in Production
+    <script type='text/javascript' src="scripts/angular.min.js"></script>
+    <script type='text/javascript' src="scripts/angular-route.min.js"></script>
+    -->
+    <script type="text/javascript" src="scripts/d3.v3.5.5.js" charset="utf-8"></script>
+    <!-- ToDo: Use min.js in Production
+    <script type="text/javascript" src="scripts/d3.v3.5.5.min.js" charset="utf-8"></script>
+    -->
+    <script type='text/javascript' src="scripts/rest_paths.js"></script>
+    <script type='text/javascript' src="scripts/link_paths.js"></script>
+    <script type='text/javascript' src="scripts/today.js"></script>
+  </head>
+  <body>
+    <h1>Release Dashboard</h1>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="routes.js"></script>
+    <script type="text/javascript" src="services/visible.js"></script>
+    <script type="text/javascript" src="directives/timeline.js"></script>
+    <script type="text/javascript" src="product_view/controller.js"></script>
+    <script type="text/javascript" src="release_view/controller.js"></script>
+    <div ng-view></div>
+  </body>
+</html>

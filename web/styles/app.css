@@ -1,0 +1,50 @@
+svg {
+  font: 10px sans-serif;
+  shape-rendering: crispEdges;
+}
+
+rect {
+  fill: #ddd;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #fff;
+}
+
+div.tl_tooltip {
+  position: fixed;
+  text-align: center;
+  padding: 5px;
+  font: 12px sans-serif;
+  background: white;
+  border: 1px solid;
+  border-color: black;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+h2 select {
+  position: relative;
+  top: 3px;
+  font-size: 24pt;
+  font-weight: bold;
+  height: auto;
+  padding: 0;
+}
+
+table thead {
+  font-weight: bold;
+}
+
+tr.timeline-visible {
+  font-weight: bold;
+}
+
+ul.count_detail {
+  display: inline;
+}
+ul.count_detail li {
+  list-style: none;
+  display: inline;
+}
